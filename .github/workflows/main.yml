@@ -34,6 +34,16 @@ jobs:
           - version: 9
             experimental: false
     steps:
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
       - name: running
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi; sleep 5
             
