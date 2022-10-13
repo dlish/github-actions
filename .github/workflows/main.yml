@@ -99,8 +99,6 @@ jobs:
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
         run: echo '${{ toJSON(matrix) }}'
-      - name: Dump jobs context
-        run: echo '${{ toJSON(jobs) }}'
       - id: check_status
         run: |
           passed="${{ needs.after_jobs.outputs.success }}"
