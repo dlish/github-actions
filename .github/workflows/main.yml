@@ -17,7 +17,7 @@ jobs:
         experimental: [false]
         include:
           - version: 9
-            experimental: true
+            experimental: false
     steps:
       - name: running
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"
@@ -47,7 +47,7 @@ jobs:
         experimental: [false]
         include:
           - version: 9
-            experimental: true
+            experimental: false
     steps:
       - name: running
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"
@@ -68,7 +68,7 @@ jobs:
     needs: [ after_jobs ]
     steps:
       - run: |
-          passed="${{ needs.after_jobs.outputs.success || needs.dummy_step.outputs.success }}"
+          passed="${{ needs.after_jobs.outputs.success }}"
           if [[ $passed == "true" ]]; then
             echo "All builds passed"
             exit 0
