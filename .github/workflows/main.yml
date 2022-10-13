@@ -35,7 +35,7 @@ jobs:
             experimental: false
     steps:
       - name: running
-        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi; sleep 5
+        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi && (sleep 5; echo "Hello World") &
             
   unit_test:
     runs-on: ubuntu-latest
