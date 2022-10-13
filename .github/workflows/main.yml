@@ -35,7 +35,7 @@ jobs:
             experimental: false
     steps:
       - name: running
-        id: ${{ matrix.version }}-running
+        id: "${{ matrix.version }}-running"
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi; sleep 5
       - name: Dump job context
         id: ${{ matrix.version }}-job-context      
