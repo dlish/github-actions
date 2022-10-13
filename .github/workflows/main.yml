@@ -68,7 +68,7 @@ jobs:
     needs: [ after_jobs ]
     steps:
       - env:
-          JOBS_CONTEXT: ${{ toJSON(jobs) }}
+          JOBS_CONTEXT: ${{ toJSON(github) }}
         run: |
           passed="${{ needs.after_jobs.outputs.success }}"
           if [[ $passed == "true" ]]; then
