@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: running
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"
+        
   lint:
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
@@ -30,7 +31,7 @@ jobs:
             experimental: true
     steps:
       - name: running
-        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"
+        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi
             
   unit_test:
     runs-on: ubuntu-latest
@@ -46,3 +47,13 @@ jobs:
     steps:
       - name: running
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"
+        
+  after_jobs:
+    needs: [lint, build, unit_test]
+    runs-on: ubuntu-latest
+    if: success() # only run when all shards have passed
+    outputs:
+      success: ${{ steps.setoutput.outputs.success }}
+    steps:
+      - id: setoutput
+        run: echo "::set-output name=success::true"
