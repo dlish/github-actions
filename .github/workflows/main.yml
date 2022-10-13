@@ -74,6 +74,6 @@ jobs:
             exit 0
           else
             echo "There was a failure"
-            echo "${{ jobs }}"
+            echo "${{ jobs.*.* }}"
             exit 1
           fi
