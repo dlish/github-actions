@@ -35,26 +35,20 @@ jobs:
             experimental: false
     steps:
       - name: running
-        id: "${{ matrix.version }}-running"
         run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 9 ]; then exit 1; fi; sleep 5
       - name: Dump job context
-        id: ${{ matrix.version }}-job-context      
         if: ${{ always() }} 
         run: echo '${{ toJSON(job) }}'
       - name: Dump steps context
-        id: ${{ matrix.version }}-steps-context
         if: ${{ always() }} 
         run: echo '${{ toJSON(steps) }}'
       - name: Dump runner context
-        id: ${{ matrix.version }}-runner-context      
         if: ${{ always() }} 
         run: echo '${{ toJSON(runner) }}'
       - name: Dump strategy context
-        id: ${{ matrix.version }}-strategy-context
         if: ${{ always() }} 
         run: echo '${{ toJSON(strategy) }}'
       - name: Dump matrix context
-        id: ${{ matrix.version }}-matrix-context      
         if: ${{ always() }} 
         run: echo '${{ toJSON(matrix) }}'
             
