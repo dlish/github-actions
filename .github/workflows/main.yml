@@ -28,10 +28,10 @@ jobs:
         experimental: [false]
         include:
           - version: 9
-            experimental: true
+            experimental: false
     steps:
       - name: running
-        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; if [ ${{ matrix.version }} == 6 ]; then exit 1; fi
+        run: echo "running job with ${{ matrix.version }} ${{ matrix.experimental }}"; exit 1; if [ ${{ matrix.version }} == 6 ]; then exit 1; fi
             
   unit_test:
     runs-on: ubuntu-latest
