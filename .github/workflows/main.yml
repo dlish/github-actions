@@ -57,3 +57,18 @@ jobs:
     steps:
       - id: setoutput
         run: echo "::set-output name=success::true"
+        
+  pr_jobs_required:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [ after_jobs ]
+    steps:
+      - run: |
+          passed="${{ needs.after_jobs.outputs.success || needs.dummy_step.outputs.success }}"
+          if [[ $passed == "true" ]]; then
+            echo "All builds passed"
+            exit 0
+          else
+            echo "There was a failure"
+            exit 1
+          fi
